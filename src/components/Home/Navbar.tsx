@@ -14,11 +14,22 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const isLoggedIn = !isPending && !!session?.user;
+  const user = session?.user;
+
+  const initials = user?.name
+    ? user.name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase()
+    : "U";
 
   const loggedOutLinks = [
     { href: "/", label: "Home" },
     { href: "/events", label: "Events" },
     { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
   ];
 
   const loggedInLinks = [
@@ -27,6 +38,7 @@ export default function Navbar() {
     { href: "/events/add", label: "Add Event" },
     { href: "/events/manage", label: "Manage Events" },
     { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
   ];
 
   const links = isLoggedIn ? loggedInLinks : loggedOutLinks;
@@ -64,16 +76,28 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Desktop auth buttons */}
+          {/* Desktop auth section */}
           <div className="hidden md:flex items-center gap-3">
             {isLoggedIn ? (
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-red-600 transition-colors"
-              >
-                <LogOut size={16} />
-                Logout
-              </button>
+              <>
+                <Link
+                  href="/profile"
+                  className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full border border-slate-200 hover:border-violet-300 hover:bg-violet-50 transition-colors"
+                >
+                  <span className="w-7 h-7 rounded-full bg-violet-600 text-white text-xs font-semibold flex items-center justify-center shrink-0">
+                    {initials}
+                  </span>
+                  <span className="text-sm font-medium text-slate-700 max-w-[100px] truncate">
+                    {user?.name}
+                  </span>
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-red-600 transition-colors"
+                >
+                  <LogOut size={16} />
+                </button>
+              </>
             ) : (
               <>
                 <Link href="/signin" className="text-sm font-medium text-slate-600 hover:text-violet-700">
@@ -118,13 +142,25 @@ export default function Navbar() {
 
             <div className="mt-2 pt-2 border-t border-slate-100">
               {isLoggedIn ? (
-                <button
-                  onClick={handleLogout}
-                  className="w-full flex items-center gap-1.5 px-3 py-2.5 text-sm font-medium text-red-600"
-                >
-                  <LogOut size={16} />
-                  Logout
-                </button>
+                <>
+                  <Link
+                    href="/profile"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-violet-50"
+                  >
+                    <span className="w-7 h-7 rounded-full bg-violet-600 text-white text-xs font-semibold flex items-center justify-center shrink-0">
+                      {initials}
+                    </span>
+                    <span className="text-sm font-medium text-slate-700">{user?.name}</span>
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-1.5 px-3 py-2.5 text-sm font-medium text-red-600"
+                  >
+                    <LogOut size={16} />
+                    Logout
+                  </button>
+                </>
               ) : (
                 <div className="flex flex-col gap-2 px-3">
                   <Link

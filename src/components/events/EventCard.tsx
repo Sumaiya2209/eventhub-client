@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Calendar, MapPin } from "lucide-react";
 import { Event } from "@/types";
-import Badge from "@/app/components/ui/Badge";
-import Button from "@/app/components/ui/Button";
+import Badge from "@/components/ui/Badge";
+import Button from "@/components/ui/Button";
 
 interface EventCardProps {
   event: Event;
