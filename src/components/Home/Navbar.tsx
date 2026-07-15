@@ -15,6 +15,7 @@ export default function Navbar() {
 
   const isLoggedIn = !isPending && !!session?.user;
   const user = session?.user;
+  const isAdmin = (user as any)?.role === "admin";
 
   const initials = user?.name
     ? user.name
@@ -41,7 +42,11 @@ export default function Navbar() {
     { href: "/contact", label: "Contact" },
   ];
 
-  const links = isLoggedIn ? loggedInLinks : loggedOutLinks;
+  const links = isLoggedIn
+    ? isAdmin
+      ? [...loggedInLinks, { href: "/admin", label: "Admin Panel" }]
+      : loggedInLinks
+    : loggedOutLinks;
 
   const handleLogout = async () => {
     await signOut();
@@ -65,11 +70,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  pathname === link.href
+                className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === link.href
                     ? "text-violet-700 bg-violet-50"
                     : "text-slate-600 hover:text-violet-700 hover:bg-violet-50"
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>
@@ -130,11 +134,10 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`px-3 py-2.5 rounded-lg text-sm font-medium ${
-                  pathname === link.href
+                className={`px-3 py-2.5 rounded-lg text-sm font-medium ${pathname === link.href
                     ? "text-violet-700 bg-violet-50"
                     : "text-slate-600 hover:bg-violet-50"
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>

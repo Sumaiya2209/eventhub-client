@@ -21,6 +21,15 @@ export const auth = betterAuth({
       trustedProviders: ["google"],
     },
   },
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        defaultValue: "user",
+        input: false, 
+      },
+    },
+  },
   database: mongodbAdapter(db, {
     client,
   }),
