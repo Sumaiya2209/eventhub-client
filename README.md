@@ -162,7 +162,8 @@ The client will run on `http://localhost:3000` and the server on `http://localho
 
 ## 📸 Screenshots
 
-*(Add screenshots of the homepage, explore page, dashboard, and admin panel here)*
+<img width="1518" height="727" alt="image" src="https://github.com/user-attachments/assets/8cc9167d-5520-40d6-8a5a-a7227ec9d580" />
+
 
 ---
 
