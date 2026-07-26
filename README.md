@@ -2,7 +2,7 @@
 
 EventHub is a full-stack event management web application where users can explore, create, join, and manage events, while admins oversee platform-wide event and user management. The platform features secure authentication with Google OAuth and bearer-token-based cross-origin authentication for production environments.
 
-**Live Site:** [https://eventhub-client.vercel.app](#)
+**Live Site:** https://eventhub-client.vercel.app
 
 
 ---
